@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Popular from './Popular';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
+import Home from './Home';
+import Compare from './Compare';
 
 class App extends Component {
   render() {
@@ -9,7 +11,16 @@ class App extends Component {
       <Router>
         <div className="container">
           <Nav />
-          <Route path="/popular" component={Popular} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/compare" component={Compare} />
+            <Route path="/popular" component={Popular} />
+            <Route
+              render={function() {
+                return <p>Not Found</p>;
+              }}
+            />
+          </Switch>
         </div>
       </Router>
     );

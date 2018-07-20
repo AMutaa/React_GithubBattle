@@ -1,5 +1,6 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
 }
 
 .container{
@@ -13,6 +14,11 @@ ul{
 
 li{
   list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+  color:brown;
 }
 
 .languages{
@@ -54,4 +60,34 @@ li{
 }
 .nav li {
   margin-right:15px;
+}
+.active{
+  font-weight: bold
+}
+.home-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button{
+    color: white;
+    background: #b9263cbe;
+    padding: 10px 10px;
+    font-weight: normal;
+    font-size: 25px;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+    text-align: center;
+    margin-top:30px;
+
+}
+
+.button:hover:enabled{
+text-decoration: none
+}
+
+.button:active{
+  transform: translateY(1px)
 }
