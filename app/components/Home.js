@@ -6,7 +6,7 @@ class Home extends Component {
     return (
       <div className="home-container">
         <h1>Compare Github Users....</h1>
-        <Link className="button" to="/Compare">
+        <Link className="button" to="/compare">
           Compare
         </Link>
       </div>

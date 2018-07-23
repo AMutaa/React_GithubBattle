@@ -10,8 +10,7 @@ function SelectLanguage(props) {
         <li
           style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
           onClick={props.onSelect.bind(null, lang)}
-          key={lang}
-        >
+          key={lang}>
           {lang}
         </li>
       ))}
@@ -23,21 +22,21 @@ function RepoGrid(props) {
   return (
     <ul className="popular-list">
       {props.repos.map((repo, index) => (
-        <li key="repo.name" className="popilar-item">
+        <li key={repo.name} className="popilar-item">
           <div className="popular-rank">#{index + 1}</div>
           <ul className="space-list-items">
             <li>
               <img
                 className="avatar"
                 src={repo.owner.avatar_url}
-                alt={`Avatar for${repo.owner.login}`}
+                alt={'Avatar for ' + repo.owner.login}
               />
             </li>
             <li>
               <a href={repo.html_url}>{repo.name}</a>
             </li>
             <li>@{repo.owner.login}</li>
-            <li>{repo.stargazers_count}</li>
+            <li>{repo.stargazers_count} stars</li>
           </ul>
         </li>
       ))}
@@ -56,7 +55,7 @@ SelectLanguage.propTypes = {
 
 class Popular extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       selectedLanguage: 'All' /* Default State */,
       repos: null,
@@ -76,11 +75,14 @@ class Popular extends Component {
       repos: null,
     }));
 
-    api.fetchPopularRepos(lang).then(repos => {
-      this.setState(() => ({
-        repos,
-      }));
-    });
+    api.fetchPopularRepos(lang)
+      .then(function (repos) {
+        this.setState(function () {
+          return {
+            repos: repos
+          }
+        });
+      }.bind(this));
   }
 
   render() {

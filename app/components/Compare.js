@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 
 function PlayerPreview(props) {
   return (
     <div>
-      <div className="column">
+      <div className='column'>
         <img
-          className="avatar"
+          className='avatar'
           src={props.avatar}
-          alt={'Avatar for'}
+          alt={'Avatar for' + props.username}
         />
 
-        <h2 className="username">@{props.username}</h2>
-        <button
-          className="reset"
-          onClick={props.onReset.bind(null, props.id)}
-        >Reset</button>
+        <h2 className='username'>@{props.username}</h2>
       </div>
+      <button
+        className='reset'
+        onClick={props.onReset.bind(null, props.id)}>
+        Reset
+        </button>
     </div>
+
   )
 }
 
 PlayerPreview.propTypes = {
   avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  onReset: PropTypes.string.isRequired,
+  onReset: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
 }
 
 class PlayerInput extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      username: '',
+      username: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,19 +44,20 @@ class PlayerInput extends React.Component {
   }
   handleChange(event) {
     var value = event.target.value;
+
     this.setState(() => ({
-      username: value,
+      username: value
     }));
   }
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.onSubmit(this.props.id, this.props.username);
+    this.props.onSubmit(this.props.id, this.state.username);
   }
   render() {
     return (
-      <form className="column" onSubmit={this.handleSubmit}>
-        <label className="header" htmlFor="username">
+      <form className='column' onSubmit={this.handleSubmit}>
+        <label className='header' htmlFor="username">
           {this.props.label}
         </label>
         <input
@@ -65,7 +69,7 @@ class PlayerInput extends React.Component {
           onChange={this.handleChange}
         />
 
-        <button className="button" type="submit" disabled={!this.state.username}>
+        <button className='button' type='submit' disabled={!this.state.username}>
           Submit
         </button>
       </form>
@@ -78,9 +82,11 @@ PlayerInput.propTypes = {
   label: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
 PlayerInput.defaultProps = {
   label: 'Username',
 };
+
 class Compare extends Component {
   constructor(props) {
     super(props);
@@ -99,7 +105,7 @@ class Compare extends Component {
     this.setState(() => {
       var newState = {};
       newState[id + 'Name'] = username;
-      newState[id + 'Image'] = 'https://github.com' + username + '.png?size=200';
+      newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
       return newState;
     });
   }
@@ -115,14 +121,15 @@ class Compare extends Component {
   }
 
   render() {
+    var match = this.props.match;
     var playerOneName = this.state.playerOneName;
-    var playerTwoName = this.state.playerTwoName;
     var playerOneImage = this.state.playerOneImage;
+    var playerTwoName = this.state.playerTwoName;
     var playerTwoImage = this.state.playerTwoImage;
 
     return (
       <div>
-        <div className="row">
+        <div className='row'>
           {!playerOneName &&
             <PlayerInput id="playerOne" label="Player One" onSubmit={this.handleSubmit} />}
 
@@ -147,6 +154,15 @@ class Compare extends Component {
             />}
 
         </div>
+        {playerOneImage && playerTwoImage &&
+          <Link
+            className='button'
+            to={{
+              pathname: match.url + '/results',
+              search: '?playerOneName=' + playerOneName + '&playerTwoName' + playerTwoName
+            }}>
+            Compare
+        </Link>}
       </div>
     );
   }
