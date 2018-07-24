@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import api from "../utils/api";
-import Loading from "./Loading";
+var React = require('react');
+var PropTypes = require('prop-types');
+var api = require('../utils/api');
+var Loading = require('./Loading');
+
 
 function SelectLanguage(props) {
   const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
@@ -55,7 +56,7 @@ SelectLanguage.propTypes = {
   onSelect: PropTypes.func.isRequired
 };
 
-class Popular extends Component {
+class Popular extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -103,4 +104,4 @@ class Popular extends Component {
   }
 }
 
-export default Popular;
+module.exports = Popular;

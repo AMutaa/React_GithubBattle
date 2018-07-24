@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+var React = require('react');
+var Link = require('react-router-dom').Link;
 
-class Home extends Component {
+class Home extends React.Component {
   render() {
     return (
       <div className="home-container">
         <h1>Compare Github Users....</h1>
-        <Link className="button" to="/compare">
-          Compare
-        </Link>
+        <Link className="button" to="/compare">Compare</Link>
       </div>
     );
   }
 }
 
-export default Home;
+module.exports = Home;

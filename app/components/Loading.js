@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+var React = require('react');
+var PropTypes = require('prop-types');
 
 var styles = {
   content: {
@@ -7,7 +7,7 @@ var styles = {
     fontSize: '35px'
   }
 }
-class Loading extends Component {
+class Loading extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +34,7 @@ class Loading extends Component {
     }.bind(this), this.props.speed)
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     window.clearInterval(this.interval);
   }
   render() {
@@ -57,4 +57,4 @@ Loading.defaultProps = {
   speed: 300
 };
 
-export default Loading;
+module.exports = Loading;

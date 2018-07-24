@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import PlayerPreview from './PlayerPreview'
+var React = require('react');
+var PropTypes = require('prop-types');
+var Link = require('react-router-dom').Link;
+var PlayerPreview = require('./PlayerPreview');
+
 
 class PlayerInput extends React.Component {
   constructor(props) {
@@ -16,21 +17,25 @@ class PlayerInput extends React.Component {
   handleChange(event) {
     var value = event.target.value;
 
-    this.setState(() => ({
-      username: value
-    }));
+    this.setState(function () {
+      return {
+        username: value
+      }
+    });
   }
+
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.onSubmit(this.props.id, this.state.username);
+    this.props.onSubmit(
+      this.props.id,
+      this.state.username
+    );
   }
   render() {
     return (
       <form className='column' onSubmit={this.handleSubmit}>
-        <label className='header' htmlFor="username">
-          {this.props.label}
-        </label>
+        <label className='header' htmlFor="username">{this.props.label}</label>
         <input
           type="text"
           id="username"
@@ -58,7 +63,7 @@ PlayerInput.defaultProps = {
   label: 'Username',
 };
 
-class Compare extends Component {
+class Compare extends React.Component {
   constructor(props) {
     super(props);
 
@@ -70,10 +75,10 @@ class Compare extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
+
   }
   handleSubmit(id, username) {
-    this.setState(() => {
+    this.setState(function () {
       var newState = {};
       newState[id + 'Name'] = username;
       newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
@@ -102,12 +107,17 @@ class Compare extends Component {
       <div>
         <div className='row'>
           {!playerOneName &&
-            <PlayerInput id="playerOne" label="Player One" onSubmit={this.handleSubmit} />}
+            <PlayerInput
+              id="playerOne"
+              label="Player One"
+              onSubmit={this.handleSubmit}
+            />}
 
           {playerOneImage !== null &&
             <PlayerPreview
               avatar={playerOneImage}
               username={playerOneName}>
+
               <button
                 className='reset'
                 onClick={this.handleReset.bind(this, 'playerOne')}>
@@ -136,7 +146,7 @@ class Compare extends Component {
             className='button'
             to={{
               pathname: match.url + '/results',
-              search: '?playerOneName=' + playerOneName + '&playerTwoName' + playerTwoName
+              search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
             }}>
             Compare
         </Link>}
@@ -144,4 +154,5 @@ class Compare extends Component {
     );
   }
 }
-export default Compare;
+module.exports = Compare;
+

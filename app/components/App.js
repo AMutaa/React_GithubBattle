@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Nav from './Nav';
-import Home from './Home';
-import Compare from './Compare';
-import Popular from './Popular';
-import Results from './Results'
-class App extends Component {
+var React = require('react');
+var ReactRouter = require('react-router-dom');
+var Router = ReactRouter.BrowserRouter;
+var Route = ReactRouter.Route;
+var Switch = ReactRouter.Switch;
+var Nav = require('./Nav');
+var Home = require('./Home');
+var Compare = require('./Compare');
+var Popular = require('./Popular');
+var Results = require('./Results');
+class App extends React.Component {
   render() {
     return (
       <Router>
@@ -13,7 +16,7 @@ class App extends Component {
           <Nav />
 
           <Switch>
-            <Route exact path='//' component={Home} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/compare' component={Compare} />
             <Route path='/compare/results' component={Results} />
             <Route path='/popular' component={Popular} />
@@ -29,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App;
+module.exports = App;

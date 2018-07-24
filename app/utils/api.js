@@ -1,5 +1,4 @@
 var axios = require('axios');
-
 var id = 'AMutaa';
 var sec = 'd9d49dcd749a7ad45a282ca7efc586509db025f7'
 var params = '?client_id=' + id + '&client_secret=' + sec;
@@ -13,7 +12,7 @@ function getProfile(username) {
 }
 
 function getRepos(username) {
-  return axios.get('https://api.github.com/users/' + username + '/repos' + params + '& per_page=100')
+  return axios.get('https://api.github.com/users/' + username + '/repos' + params + '&per_page=100')
 }
 
 function getStarCount(repos) {

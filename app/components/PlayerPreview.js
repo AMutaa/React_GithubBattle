@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+var React = require('react');
+var PropTypes = require('prop-types');
 
 
 function PlayerPreview(props) {
@@ -25,4 +24,5 @@ PlayerPreview.propTypes = {
   avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 }
-export default PlayerPreview;
+
+module.exports = PlayerPreview;
