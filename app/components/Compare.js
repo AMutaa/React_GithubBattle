@@ -1,36 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-
-function PlayerPreview(props) {
-  return (
-    <div>
-      <div className='column'>
-        <img
-          className='avatar'
-          src={props.avatar}
-          alt={'Avatar for' + props.username}
-        />
-
-        <h2 className='username'>@{props.username}</h2>
-      </div>
-      <button
-        className='reset'
-        onClick={props.onReset.bind(null, props.id)}>
-        Reset
-        </button>
-    </div>
-
-  )
-}
-
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-}
+import PlayerPreview from './PlayerPreview'
 
 class PlayerInput extends React.Component {
   constructor(props) {
@@ -136,10 +107,13 @@ class Compare extends Component {
           {playerOneImage !== null &&
             <PlayerPreview
               avatar={playerOneImage}
-              username={playerOneName}
-              onReset={this.handleReset}
-              id='playerOne'
-            />}
+              username={playerOneName}>
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(this, 'playerOne')}>
+                Reset
+              </button>
+            </PlayerPreview>}
 
 
           {!playerTwoName &&
@@ -148,10 +122,13 @@ class Compare extends Component {
           {playerTwoImage !== null &&
             <PlayerPreview
               avatar={playerTwoImage}
-              username={playerTwoName}
-              onReset={this.handleReset}
-              id='playerTwo'
-            />}
+              username={playerTwoName}>
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(this, 'playerTwo')}>
+                Reset
+              </button>
+            </PlayerPreview>}
 
         </div>
         {playerOneImage && playerTwoImage &&
