@@ -27,7 +27,7 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  info: PropTypes.object.isRequired
+  info: PropTypes.object.isRequired,
 }
 
 function Player(props) {
@@ -54,7 +54,7 @@ class Results extends Component {
       winner: null,
       loser: null,
       error: null,
-      loading: true
+      loading: true,
     }
   }
   componentDidMount() {
@@ -63,8 +63,8 @@ class Results extends Component {
     api.compare([
       players.playerOneName,
       players.playerTwoName
-    ]).then(function (results) {
-      if (results === null) {
+    ]).then(function (players) {
+      if (players === null) {
         return this.setState(function () {
           return {
             error: 'Looks like there was an error. Check that both users exist on Github',
@@ -75,8 +75,8 @@ class Results extends Component {
       this.setState(function () {
         return {
           error: null,
-          winner: results[0],
-          loser: results[1],
+          winner: players[0],
+          loser: players[1],
           loading: false
         }
       })
@@ -97,7 +97,7 @@ class Results extends Component {
       return (
         <div>
           <p>{error}</p>
-          <Link to='/battle'>Reset</Link>
+          <Link to='/compare'>Reset</Link>
         </div>
       )
     }

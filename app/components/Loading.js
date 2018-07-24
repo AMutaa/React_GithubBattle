@@ -55,6 +55,6 @@ Loading.propTypes = {
 Loading.defaultProps = {
   text: 'Loading',
   speed: 300
-}
+};
 
 export default Loading;
