@@ -44,7 +44,6 @@ class Loading extends React.Component {
       </p>
     )
   }
-
 }
 
 Loading.propTypes = {
